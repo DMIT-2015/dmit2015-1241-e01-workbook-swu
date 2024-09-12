@@ -1,0 +1,125 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:o="http://omnifaces.org/ui"
+        xmlns:of="http://omnifaces.org/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/faces-templates/layout.xhtml"
+>
+
+    <ui:param name="title" value="Hello in Jakarta Faces"/>
+
+    <ui:define name="maincontent">
+
+        <h1>Hello in Jakarta Faces</h1>
+
+        <!--Display all messages in FacesContext -->
+        <p:messages id="messages">
+            <p:autoUpdate/>
+        </p:messages>
+        <p:growl id="growl"/>
+
+        <h:form prependId="false">
+            <p:focus context="formPanel"/>
+
+            <p:panel id="formPanel" header="Form Panel">
+                <div class="ui-fluid">
+
+                    <div class="field">
+                        <p:outputLabel for="@next" >username</p:outputLabel>
+                        <p:inputText id="username" value="#{helloView.username}"/>
+                    </div>
+
+                    <div class="formgroup-inline">
+                        <div class="field">
+                            <p:commandButton value="Say Hello"
+                                             action="#{helloView.onSayHello()}"
+                                             update=":messages :growl"
+                            >
+                            </p:commandButton>
+                        </div>
+
+                        <div class="field">
+                            <p:commandButton value="Add User"
+                                             action="#{helloView.onAddUser()}"
+                                             update=":messages :growl dataTable"
+                            >
+                            </p:commandButton>
+                        </div>
+
+                        <div class="field">
+                            <p:commandButton value="Clear"
+                                             action="#{helloView.onClear()}"
+                                             update="@form dataTable"
+                                             styleClass="ui-button-secondary"
+                            >
+                            </p:commandButton>
+                        </div>
+                    </div>
+
+                </div>
+
+            </p:panel>
+
+        </h:form>
+
+        <h:form prependId="false">
+            <div class="card">
+                <p:dataTable id="dataTable"
+                             value="#{helloView.userList}"
+                             var="currentItem"
+                >
+
+                    <p:column headerText="username">
+                        <h:outputText value="#{currentItem}" />
+                    </p:column>
+
+                    <p:column headerText="Action">
+                        <p:commandButton
+                                id="updateButton"
+                                value="Update"
+                                icon="pi pi-save"
+                                styleClass="ui-button-success"
+                                action="TODO Set EL-Method expression"
+                                update=":messages :growl dataTable"
+                        >
+                            <f:setPropertyActionListener target="TODO: Set EL-value expression"
+                                                         value="#{currentItem}" />
+                        </p:commandButton>
+
+                        <p:commandButton
+                                id="deleteButton"
+                                value="Delete"
+                                icon="pi pi-trash"
+                                styleClass="ui-button-danger"
+                                process="@this"
+                                action="TODO: Set EL-Method expression"
+                                update=":messages :growl dataTable"
+                        >
+                            <f:setPropertyActionListener target="TODO: Set EL-value expression"
+                                                         value="#{currentItem}" />
+                            <p:confirm header="Delete Confirmation" message="Do you want to delete this record?" icon="pi pi-info-circle"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+                </p:confirmDialog>
+
+            </div>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
