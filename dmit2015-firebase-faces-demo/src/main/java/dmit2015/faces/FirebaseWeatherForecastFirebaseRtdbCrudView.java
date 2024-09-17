@@ -9,7 +9,7 @@ import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import lombok.Getter;
 import lombok.Setter;
-//import net.datafaker.Faker;
+import net.datafaker.Faker;
 import org.omnifaces.util.Messages;
 import org.primefaces.PrimeFaces;
 
@@ -19,8 +19,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.random.RandomGenerator;
 
 /**
  * This Jakarta Faces backing bean class contains the data and event handlers
@@ -87,8 +89,13 @@ public class FirebaseWeatherForecastFirebaseRtdbCrudView implements Serializable
      */
     public void onGenerateData() {
         try {
-//            var faker = new Faker();
-            //currentFirebaseWeatherForecast.setPropertyName(faker.providerName().dataName());
+            var faker = new Faker();
+            var randomGenerator = RandomGenerator.getDefault();
+            selectedFirebaseWeatherForecast.setCity(faker.address().city());
+            selectedFirebaseWeatherForecast.setDate(LocalDate.now().plusDays(randomGenerator.nextInt(1, 6)));
+            selectedFirebaseWeatherForecast.setTemperatureCelsius(faker.number().numberBetween(-20,50));
+            selectedFirebaseWeatherForecast.setDescription(faker.weather().description());
+
 
         } catch (Exception e) {
             Messages.addGlobalError("Error generating data {0}", e.getMessage());
