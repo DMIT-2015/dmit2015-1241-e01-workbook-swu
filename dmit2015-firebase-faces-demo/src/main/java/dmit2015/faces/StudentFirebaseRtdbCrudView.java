@@ -247,25 +247,31 @@ public class StudentFirebaseRtdbCrudView implements Serializable {
             if (httpResponse.statusCode() == 200) {
                 // Get the body of the Http Response
                 var responseBodyJson = httpResponse.body();
-                // Convert the responseBodyJson to an LinkedHashMap<String, Student>
-                LinkedHashMap<String, Student> responseData = jsonb.fromJson(responseBodyJson, new LinkedHashMap<String, Student>() {
-                }.getClass().getGenericSuperclass());
-                // Convert the LinkedHashMap<String, Student> to List<Student>
-                students = responseData.entrySet()
-                        .stream()
-                        .map(item -> {
-                            var currentStudent = new Student();
-                            currentStudent.setName(item.getKey());
+                // Check if any data no data is return
+                if (responseBodyJson.equalsIgnoreCase("null")) {
+                    students = null;
+                } else {
+                    // Convert the responseBodyJson to an LinkedHashMap<String, Student>
+                    LinkedHashMap<String, Student> responseData = jsonb.fromJson(responseBodyJson, new LinkedHashMap<String, Student>() {
+                    }.getClass().getGenericSuperclass());
+                    // Convert the LinkedHashMap<String, Student> to List<Student>
+                    students = responseData.entrySet()
+                            .stream()
+                            .map(item -> {
+                                var currentStudent = new Student();
+                                currentStudent.setName(item.getKey());
 
-                            currentStudent.setFirstName(item.getValue().getFirstName());
-                            currentStudent.setLastName(item.getValue().getLastName());
-                            currentStudent.setEmail(item.getValue().getEmail());
+                                currentStudent.setFirstName(item.getValue().getFirstName());
+                                currentStudent.setLastName(item.getValue().getLastName());
+                                currentStudent.setEmail(item.getValue().getEmail());
 
-                            return currentStudent;
-                        })
-                        .toList();
+                                return currentStudent;
+                            })
+                            .toList();
 
-                Messages.addGlobalInfo("Successfully fetched Firebase Realtime Database data");
+                    Messages.addGlobalInfo("Successfully fetched Firebase Realtime Database data");
+                }
+
                 PrimeFaces.current().ajax().update("dialogs:messages", "form:dt-Students");
             } else {
                 Messages.addGlobalInfo("Fetch data was not successful, server return status {0}", httpResponse.statusCode());

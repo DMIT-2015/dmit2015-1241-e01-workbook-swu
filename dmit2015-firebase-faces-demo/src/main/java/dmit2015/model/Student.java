@@ -12,4 +12,5 @@ public class Student {
     private String firstName;   // Student first name
     private String lastName;    // Student last name
     private String email;       // Student email
+
 }
