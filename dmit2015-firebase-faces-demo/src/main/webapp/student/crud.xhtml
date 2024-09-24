@@ -134,7 +134,8 @@
                     <f:facet name="footer">
                         <p:commandButton value="Generate" icon="pi pi-calculator"
                                          actionListener="#{currentStudentFirebaseRtdbCrudView.onGenerateData()}"
-                                         update="manage-Student-content" process="manage-Student-content @this"/>
+                                         update="manage-Student-content"
+                                         process="@this"/>
 
                         <p:commandButton value="Save" icon="pi pi-check"
                                          actionListener="#{currentStudentFirebaseRtdbCrudView.onSave}"
