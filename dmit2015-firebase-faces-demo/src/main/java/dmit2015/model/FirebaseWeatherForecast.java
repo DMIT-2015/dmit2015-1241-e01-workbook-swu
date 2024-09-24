@@ -1,5 +1,8 @@
 package dmit2015.model;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+
 import java.time.LocalDate;
 
 /**
@@ -15,6 +18,8 @@ public class FirebaseWeatherForecast {
 
     private LocalDate date;
 
+    @Min(value = -20, message = "Celsius temperature must bet between -20 and 50")
+    @Max(value = 50, message = "Celsius temperature must bet between -20 and 50")
     private int temperatureCelsius;
 
     private String description;

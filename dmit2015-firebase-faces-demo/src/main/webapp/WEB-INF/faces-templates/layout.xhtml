@@ -69,6 +69,17 @@
 
                 </p:submenu>
 
+                <c:if test="${empty firebaseLoginSession.username}">
+                    <p:menuitem
+                            value="Login"
+                            action="/firebaseLogin" />
+                </c:if>
+                <c:if test="${not empty firebaseLoginSession.username}">
+                    <p:menuitem
+                            value="Logout #{firebaseLoginSession.username}"
+                            action="#{firebaseLogout.submit}" />
+                </c:if>
+
             </p:menubar>
         </h:form>
     </div>
