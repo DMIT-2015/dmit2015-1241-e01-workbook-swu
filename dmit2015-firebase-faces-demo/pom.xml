@@ -35,12 +35,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.eclipse.microprofile.config</groupId>
-            <artifactId>microprofile-config-api</artifactId>
-            <version>3.1</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
@@ -166,8 +160,8 @@
                         <!-- https://docs.wildfly.org/33/Bootable_Guide.html#wildfly_layers -->
                         <layer>cloud-server</layer>
                         <layer>jsf</layer>
-                        <layer>microprofile-config</layer>
-                        <layer>microprofile-rest-client</layer>
+                        <layer>microprofile-platform</layer>
+<!--                        <layer>microprofile-rest-client</layer>-->
                     </layers>
                     <excluded-layers>
                         <layer>deployment-scanner</layer>
