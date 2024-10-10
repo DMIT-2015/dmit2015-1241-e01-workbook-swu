@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 import lombok.Setter;
+import net.datafaker.Faker;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -84,6 +85,13 @@ public class Student implements Serializable {
         return Objects.hash(id);
     }
 
+    public static Student of(Faker faker) {
+        Student student = new Student();
+        student.setFirstName(faker.name().firstName());
+        student.setLastName(faker.name().lastName());
+        student.setEmail(faker.internet().emailAddress());
+        return student;
+    }
 
     public static Optional<Student> parseCsv(String line) {
         final var DELIMITER = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
