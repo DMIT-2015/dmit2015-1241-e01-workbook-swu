@@ -239,6 +239,7 @@
                     <cli-sessions>
                         <cli-session>
                             <script-files>
+                                <script>./wildfly-scripts/enable-oneway-https.cli</script>
                                 <script>./wildfly-scripts/configure-elytron.cli</script>
                             </script-files>
                         </cli-session>
