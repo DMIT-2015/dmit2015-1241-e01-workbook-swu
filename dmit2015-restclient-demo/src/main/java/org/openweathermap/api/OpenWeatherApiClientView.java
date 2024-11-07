@@ -48,23 +48,23 @@ public class OpenWeatherApiClientView implements Serializable {
 
     @PostConstruct
     public void init() {
-        String ip = Faces.getRemoteAddr();
-        if (ip.equals("127.0.0.1")) {
-            ip = "192.197.128.13";
-        }
-        var geoLocationApiResponse = _geoLocationRestClient.getIpGeoLocation(
-                ip,ipGeoLocationApiKey);
-//        city = geoLocationApiResponse.getCity();
-        currentWeatherApiResponse = _weatherRestClient.getCurrentWeatherByGeographicalCoordinates(
-                geoLocationApiResponse.getLatitude().toString(),
-                geoLocationApiResponse.getLongitude().toString(),
-                openweatherApiKey,
-                units
-        );
-        String message = String.format("The current weather in %s is %.2f",
-                currentWeatherApiResponse.getName(),
-                currentWeatherApiResponse.getMain().getTemp());
-        Messages.addGlobalInfo(message);
+//        String ip = Faces.getRemoteAddr();
+//        if (ip.equals("127.0.0.1")) {
+//            ip = "192.197.128.13";
+//        }
+//        var geoLocationApiResponse = _geoLocationRestClient.getIpGeoLocation(
+//                ip,ipGeoLocationApiKey);
+////        city = geoLocationApiResponse.getCity();
+//        currentWeatherApiResponse = _weatherRestClient.getCurrentWeatherByGeographicalCoordinates(
+//                geoLocationApiResponse.getLatitude().toString(),
+//                geoLocationApiResponse.getLongitude().toString(),
+//                openweatherApiKey,
+//                units
+//        );
+//        String message = String.format("The current weather in %s is %.2f",
+//                currentWeatherApiResponse.getName(),
+//                currentWeatherApiResponse.getMain().getTemp());
+//        Messages.addGlobalInfo(message);
 //        doSearchByCity();
     }
 
