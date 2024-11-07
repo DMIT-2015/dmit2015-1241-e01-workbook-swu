@@ -19,7 +19,7 @@ public class TodoApiResponse {
 @JsonbProperty("complete")
 private Boolean complete;
 @JsonbProperty("id")
-private Integer id;
+private Long id;
 @JsonbProperty("name")
 private String name;
 @JsonbProperty("version")
@@ -38,12 +38,12 @@ this.complete = complete;
 }
 
 @JsonbProperty("id")
-public Integer getId() {
+public Long getId() {
 return id;
 }
 
 @JsonbProperty("id")
-public void setId(Integer id) {
+public void setId(Long id) {
 this.id = id;
 }
 
