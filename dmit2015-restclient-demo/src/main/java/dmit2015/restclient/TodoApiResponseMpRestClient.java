@@ -42,21 +42,21 @@ import java.util.List;
 public interface TodoApiResponseMpRestClient {
 
     @POST
-    Response create(TodoApiResponse newTodoApiResponse);
+    Response create(TodoApiResponse newTodoApiResponse, @HeaderParam("Authorization") String bearerAuth);
 
     @GET
-    List<TodoApiResponse> findAll();
+    List<TodoApiResponse> findAll(@HeaderParam("Authorization") String bearerAuth);
 
     @GET
     @Path("/{id}")
-    TodoApiResponse findById(@PathParam("id") Long id);
+    TodoApiResponse findById(@PathParam("id") Long id, @HeaderParam("Authorization") String bearerAuth);
 
     @PUT
     @Path("/{id}")
-    TodoApiResponse update(@PathParam("id") Long id, TodoApiResponse updatedTodoApiResponse);
+    TodoApiResponse update(@PathParam("id") Long id, TodoApiResponse updatedTodoApiResponse, @HeaderParam("Authorization") String bearerAuth);
 
     @DELETE
     @Path("/{id}")
-    void delete(@PathParam("id") Long id);
+    void delete(@PathParam("id") Long id, @HeaderParam("Authorization") String bearerAuth);
 
 }

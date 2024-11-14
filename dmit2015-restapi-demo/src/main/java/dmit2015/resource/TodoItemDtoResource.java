@@ -5,6 +5,7 @@ import dmit2015.dto.TodoItemDto;
 import dmit2015.dto.TodoItemMapper;
 import dmit2015.entity.TodoItem;
 import dmit2015.repository.TodoItemRepository;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.OptimisticLockException;
@@ -53,6 +54,7 @@ public class TodoItemDtoResource {
     @Inject
     private TodoItemRepository todoItemRepository;
 
+    @RolesAllowed({"Executive","Sales"})
     @POST   // POST: restapi/TodoItemsDto
     public Response postTodoItem(TodoItemDto dto) {
         if (dto == null) {
@@ -87,6 +89,7 @@ public class TodoItemDtoResource {
         return Response.ok(dto).build();
     }
 
+    @RolesAllowed("**")
     @GET    // GET: restapi/TodoItemsDto
     public Response getTodoItems() {
         return Response.ok(todoItemRepository.findAll()
@@ -138,6 +141,7 @@ public class TodoItemDtoResource {
         return Response.ok(dto).build();
     }
 
+    @RolesAllowed("Executive")
     @DELETE // DELETE: restapi/TodoItemsDto/5
     @Path("{id}")
     public Response deleteTodoItem(@PathParam("id") Long id) {
